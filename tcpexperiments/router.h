@@ -27,7 +27,8 @@ class Router : public cSimpleModule
 {
   private:
     cPacketQueue reqQ;
-    cMessage *endTxMsg;
+    cMessage *endTxMsg,*updateprice;
+    double estrate,totalrecv;
   protected:
     virtual void initialize() override;
     virtual void handleMessage(cMessage *msg) override;

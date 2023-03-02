@@ -28,6 +28,8 @@ void Host::initialize()
     gendata = new cMessage("gendata");
     scheduleAfter(interpacketDuration,gendata);
     endTxMsg = new cMessage("endTxMsg");
+    as = 1e4;
+    updatemsg = new cMessage("updatemsg");
 }
 
 void Host::handleMessage(cMessage *msg)
@@ -61,5 +63,9 @@ void Host::handleMessage(cMessage *msg)
     {
 
         delete msg;
+    }
+    else if(msg==updatemsg)
+    {
+
     }
 }

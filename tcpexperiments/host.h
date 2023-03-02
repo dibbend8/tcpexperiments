@@ -27,10 +27,11 @@ class Host : public cSimpleModule
 {
 
 private:
-    cMessage *gendata,*endTxMsg;
+    cMessage *gendata,*endTxMsg,*updatemsg;
     double datarate,interpacketDuration;
     cPacketQueue dataQ;
     int packetlength;
+    double as;
 protected:
     virtual void initialize() override;
     virtual void handleMessage(cMessage *msg) override;

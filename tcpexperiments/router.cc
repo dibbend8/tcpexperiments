@@ -25,6 +25,9 @@ void Router::initialize()
     //    servrate = getParentModule()->par("routerrate").doubleValue()*1e9;
     //    serve = new cMessage("serve");
     endTxMsg = new cMessage("endTxmsg");
+    updateprice = new cMessage("updateprice");
+    scheduleAfter(50e-3, updateprice);
+    estrate = 0;totalrecv=0;
 }
 
 void Router::handleMessage(cMessage *msg)
@@ -35,22 +38,24 @@ void Router::handleMessage(cMessage *msg)
         cChannel *txChannel = gate("toserver$o",0)->getTransmissionChannel();
         simtime_t txFinishTime = txChannel->getTransmissionFinishTime();
         cPacket *data = (cPacket *) msg;
+        totalrecv+=data->getBitLength();
+        reqQ.insert(data);
         if (txFinishTime <= simTime()) {
             // channel free; send out packet immediately
 
             if(getIndex()==2)
             {
-                send(data, "toserver$o",data->getKind());
+                send(reqQ.pop(), "toserver$o",data->getKind());
             }
             else
             {
-                send(data, "toserver$o",0);
+                send(reqQ.pop(), "toserver$o",0);
             }
         }
         else {
-            // store packet and schedule timer; when the timer expires,
+            // stores packet and schedule timer; when the timer expires,
             // the packet should be removed from the queue and sent out
-            reqQ.insert(data);
+//            reqQ.insert(data);
             scheduleAt(txFinishTime, endTxMsg);
         }
     }
@@ -66,7 +71,7 @@ void Router::handleMessage(cMessage *msg)
             send(reqQ.pop(), "toserver$o",0);
         }
     }
-    if(strcmp(msg->getName(),"ack")==0)
+    else if(strcmp(msg->getName(),"ack")==0)
     {
        if(getIndex()==2)
        {
@@ -84,5 +89,10 @@ void Router::handleMessage(cMessage *msg)
        {
            send(msg,"torouter$o",0);
        }
+    }
+    else if(msg==updateprice)
+    {
+        estrate = totalrecv/simTime().dbl();
+
     }
 }
