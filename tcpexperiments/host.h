@@ -19,7 +19,7 @@
 #include <omnetpp.h>
 
 using namespace omnetpp;
-
+using namespace std;
 /**
  * TODO - Generated class
  */
@@ -31,7 +31,7 @@ private:
     double datarate,interpacketDuration;
     cPacketQueue dataQ;
     int packetlength;
-    double as;
+    double as,price;
 protected:
     virtual void initialize() override;
     virtual void handleMessage(cMessage *msg) override;

@@ -1,6 +1,6 @@
-out/clang-debug//SDN.o: SDN.cc SDN.h \
+out/clang-debug//ack_m.o: ack_m.cc ack_m.h \
   /home/five/omnetpp-6.0/include/omnetpp.h
 
-SDN.h:
+ack_m.h:
 
 /home/five/omnetpp-6.0/include/omnetpp.h:

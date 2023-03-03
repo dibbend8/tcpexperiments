@@ -19,7 +19,7 @@
 #include <omnetpp.h>
 
 using namespace omnetpp;
-
+using namespace std;
 /**
  * TODO - Generated class
  */
@@ -28,7 +28,7 @@ class Router : public cSimpleModule
   private:
     cPacketQueue reqQ;
     cMessage *endTxMsg,*updateprice;
-    double estrate,totalrecv;
+    double estrate,totalrecv,lp = 1.5e-2,price=0.5;
   protected:
     virtual void initialize() override;
     virtual void handleMessage(cMessage *msg) override;

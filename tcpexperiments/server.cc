@@ -14,7 +14,7 @@
 // 
 
 #include "server.h"
-
+#include "ack_m.h"
 Define_Module(Server);
 
 void Server::initialize()
@@ -28,8 +28,11 @@ void Server::handleMessage(cMessage *msg)
 
     if(strcmp(msg->getName(),"data")==0)
     {
-        cMessage *ack  = new cMessage("ack");
+        Ack *ack  = new Ack("ack");
         ack->setKind(msg->getKind());
+        ack->setId(msg->getKind());
+        ack->setPrice1(0);
+        ack->setPrice2(0);
         send(ack, "torouter$o");
     }
 

@@ -14,7 +14,7 @@
 // 
 
 #include "router.h"
-
+#include "ack_m.h"
 Define_Module(Router);
 
 void Router::initialize()
@@ -26,7 +26,7 @@ void Router::initialize()
     //    serve = new cMessage("serve");
     endTxMsg = new cMessage("endTxmsg");
     updateprice = new cMessage("updateprice");
-    scheduleAfter(50e-3, updateprice);
+    scheduleAfter(10e-3, updateprice);
     estrate = 0;totalrecv=0;
 }
 
@@ -37,8 +37,8 @@ void Router::handleMessage(cMessage *msg)
     {
         cChannel *txChannel = gate("toserver$o",0)->getTransmissionChannel();
         simtime_t txFinishTime = txChannel->getTransmissionFinishTime();
-        cPacket *data = (cPacket *) msg;
-        totalrecv+=data->getBitLength();
+        cPacket *data = check_and_cast<cPacket *> (msg);
+        totalrecv+=data->getByteLength();
         reqQ.insert(data);
         if (txFinishTime <= simTime()) {
             // channel free; send out packet immediately
@@ -55,7 +55,7 @@ void Router::handleMessage(cMessage *msg)
         else {
             // stores packet and schedule timer; when the timer expires,
             // the packet should be removed from the queue and sent out
-//            reqQ.insert(data);
+            //            reqQ.insert(data);
             scheduleAt(txFinishTime, endTxMsg);
         }
     }
@@ -71,28 +71,39 @@ void Router::handleMessage(cMessage *msg)
             send(reqQ.pop(), "toserver$o",0);
         }
     }
+    else if(msg==updateprice && getIndex()!=0)
+    {
+        estrate = (totalrecv*8)/simTime().dbl();
+        cout<<"Estimated link rate at router "<<getIndex()<<" = "<<estrate<<endl;
+        cDatarateChannel * incomech = (cDatarateChannel*)gate("torouter$o",0)->getChannel();
+        double c = incomech->getDatarate();
+        price  -=  lp*fmax((estrate-c),0);
+
+        cout<<"Updated Price for "<<getIndex()<<" is "<<price<<endl;
+        scheduleAfter(10e-3, updateprice);
+
+
+    }
     else if(strcmp(msg->getName(),"ack")==0)
     {
-       if(getIndex()==2)
-       {
-           send(msg, "torouter$o",0);
-       }
-       else if(getIndex()==1 && msg->getKind()==2)
-       {
-           send(msg,"tohost$o",0);
-       }
-       else if(getIndex()==0)
-       {
-           send(msg,"tohost$o",msg->getKind());
-       }
-       else
-       {
-           send(msg,"torouter$o",0);
-       }
-    }
-    else if(msg==updateprice)
-    {
-        estrate = totalrecv/simTime().dbl();
-
+        Ack * ack = (Ack*) msg;
+        if(getIndex()==2)
+        {
+            ack->setPrice2(price);
+            send(ack, "torouter$o",0);
+        }
+        else if(getIndex()==1 && msg->getKind()==2)
+        {
+            send(ack,"tohost$o",0);
+        }
+        else if(getIndex()==0)
+        {
+            send(ack,"tohost$o",msg->getKind());
+        }
+        else
+        {
+            ack->setPrice1(price);
+            send(ack,"torouter$o",0);
+        }
     }
 }

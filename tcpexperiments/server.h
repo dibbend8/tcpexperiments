@@ -19,7 +19,7 @@
 #include <omnetpp.h>
 
 using namespace omnetpp;
-
+using namespace std;
 /**
  * TODO - Generated class
  */

@@ -14,7 +14,7 @@
 // 
 
 #include "host.h"
-
+#include "ack_m.h"
 Define_Module(Host);
 
 
@@ -30,6 +30,8 @@ void Host::initialize()
     endTxMsg = new cMessage("endTxMsg");
     as = 1e4;
     updatemsg = new cMessage("updatemsg");
+    scheduleAfter(50e-3,updatemsg);
+    price = 0;
 }
 
 void Host::handleMessage(cMessage *msg)
@@ -40,7 +42,7 @@ void Host::handleMessage(cMessage *msg)
         scheduleAfter(interpacketDuration, gendata);
         cPacket *data = new cPacket("data");
         data->setByteLength(packetlength);
-        data->setKind(intuniform(0,2));
+        data->setKind(getIndex());
         cChannel *txChannel = gate("torouter$o")->getTransmissionChannel();
         simtime_t txFinishTime = txChannel->getTransmissionFinishTime();
         if (txFinishTime <= simTime()) {
@@ -61,11 +63,17 @@ void Host::handleMessage(cMessage *msg)
     }
     else if(strcmp(msg->getName(),"ack")==0)
     {
-
+        Ack * ack = (Ack *)msg;
+        double price1 = ack->getPrice1();
+        double price2 = ack->getPrice2();
+        price = price1+price2;
         delete msg;
     }
     else if(msg==updatemsg)
     {
+        datarate = exp(price/as) -1;
+        interpacketDuration = (double)(packetlength*8)/(datarate*1e6);
+        scheduleAfter(50e-3,updatemsg);
 
     }
 }
