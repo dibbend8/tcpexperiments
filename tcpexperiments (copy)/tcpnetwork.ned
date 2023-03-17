@@ -16,7 +16,7 @@ network TCPNet
 {
     parameters:
         int numhost = default(3);
-        double hostrate @unit(Mbps)= default(1.5Mbps);
+        double hostrate @unit(Mbps)= default(100Mbps);
         double routerrate @unit(Gbps) = default(1Gbps);
         int numrouter = default(3);
         int numserver = default(3);
@@ -26,18 +26,18 @@ network TCPNet
         server[numserver]:Server;
         sdn:SDN;
      connections allowunconnected:
-  			host[0].torouter <--> {datarate=1 Gbps;} <--> router[0].tohost++;
-  			host[1].torouter <--> {datarate=1 Gbps;} <--> router[0].tohost++;
-  			host[2].torouter <--> {datarate=1 Gbps;} <--> router[1].tohost++;
-//  			server[0].torouter <--> {datarate=1.5Mbps;} <--> router[2].tohost++;
-//  			server[1].torouter <--> {datarate=1.5Mbps;} <--> router[2].tohost++;
-//  			server[2].torouter <--> {datarate=1.5Mbps;} <--> router[2].tohost++;
-  			router[0].toserver++ <--> {datarate= 100 Mbps;} <--> router[1].torouter++;
-  			router[1].toserver++ <--> {datarate= 128 Mbps;} <--> router[2].torouter++;
+  			host[0].torouter <--> {datarate=100Mbps;} <--> router[0].tohost++;
+  			host[1].torouter <--> {datarate=100Mbps;} <--> router[0].tohost++;
+  			host[2].torouter <--> {datarate=100Mbps;} <--> router[1].tohost++;
+//  			server[0].torouter <--> {datarate=100Mbps;} <--> router[2].tohost++;
+//  			server[1].torouter <--> {datarate=100Mbps;} <--> router[2].tohost++;
+//  			server[2].torouter <--> {datarate=100Mbps;} <--> router[2].tohost++;
+  			router[0].toserver++ <--> {datarate=100Mbps;} <--> router[1].torouter++;
+  			router[1].toserver++ <--> {datarate=100Mbps;} <--> router[2].torouter++;
   			 for i= 0.. numrouter-1
         	{
-        	    server[i].torouter <--> {datarate=1 Gbps;} <--> router[2].toserver++;
-        	    sdn.torouter++ <-->{datarate=1 Gbps;}<-->router[i].tosdn++;
+        	    server[i].torouter <--> {datarate=100Mbps;} <--> router[2].toserver++;
+        	    sdn.torouter++ <-->{datarate=100Mbps;}<-->router[i].tosdn++;
         	}   
   			
   			

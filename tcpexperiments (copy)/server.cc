@@ -13,37 +13,26 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TCPEXPERIMENTS_HOST_H_
-#define __TCPEXPERIMENTS_HOST_H_
+#include "server.h"
 
-#include <omnetpp.h>
+Define_Module(Server);
 
-using namespace omnetpp;
-using namespace std;
-/**
- * TODO - Generated class
- */
-class Host : public cSimpleModule
+void Server::initialize()
 {
+    // TODO - Generated method body
+}
 
-private:
-    cMessage *gendata,*updatemsg;
-    double datarate,interpacketDuration,maxrate,minrate;
-    cPacketQueue dataQ;
-    int packetlength;
-    double as,price;
-protected:
-    virtual void initialize() override;
-    virtual void handleMessage(cMessage *msg) override;
-public:
-    ~Host()
+void Server::handleMessage(cMessage *msg)
+{
+    // TODO - Generated method body
+
+    if(strcmp(msg->getName(),"data")==0)
     {
-        cancelAndDelete(gendata);
-        cancelAndDelete(updatemsg);
-
-        dataQ.clear();
+        cMessage *ack  = new cMessage("ack");
+        ack->setKind(msg->getKind());
+        send(ack, "torouter$o");
     }
 
-};
 
-#endif
+    delete msg;
+}

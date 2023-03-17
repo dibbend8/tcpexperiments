@@ -1,0 +1,26 @@
+file 80352 1678931567                                           
+version 3
+run General-0-20230316-07:20:33-10161
+attr configname General
+attr datetime 20230316-07:20:33
+attr datetimef 20230316-072033
+attr experiment General
+attr inifile tCPNet.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network TCPNet
+attr processid 10161
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config network TCPNet
+
+vector 0 TCPNet.server[0] "" ETV
+0	461 344 5 75 0.032634 0.480634 15 0.000634 0.000634 0.00951 6.02934e-06
+0	805 38908 92 10319 0.500884 0.999764 1560 0.000634 0.109764 86.11044 6.30341274056
+0	39713 40638 10332 20578 1.000084 1.499924 1563 0.109834 0.219174 257.119752 43.856390934808
+

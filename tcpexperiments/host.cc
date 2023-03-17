@@ -22,15 +22,23 @@ void Host::initialize()
 {
     // TODO - Generated method body
 
-    packetlength = 1512;//in bytes
-    datarate = 1; //in Mbps
+    packetlength = 4000;//in bytes
+    maxrate = 128; //in Mbps
+    minrate = 1;//Mbps
+    datarate = minrate;
     interpacketDuration = (double)(packetlength*8)/(datarate*1e6);
     gendata = new cMessage("gendata");
-    scheduleAfter(interpacketDuration,gendata);
-    endTxMsg = new cMessage("endTxMsg");
-    as = 1e4;
+
+    as = 1e5;
     updatemsg = new cMessage("updatemsg");
-    scheduleAfter(50e-3,updatemsg);
+    if(getIndex()==0)
+    {
+        scheduleAfter(interpacketDuration,gendata);
+    }
+    else
+    {
+        datarate=0;
+    }
     price = 0;
 }
 
@@ -53,27 +61,71 @@ void Host::handleMessage(cMessage *msg)
             // store packet and schedule timer; when the timer expires,
             // the packet should be removed from the queue and sent out
             dataQ.insert(data);
+            cMessage *endTxMsg = new cMessage("endTxMsg");
             scheduleAt(txFinishTime, endTxMsg);
+        }
+        if(simTime()>=120 && getIndex()==0)
+        {
+            cancelEvent(gendata);
+        }
+        else if(simTime()>=160 && getIndex()==1)
+        {
+            cancelEvent(gendata);
+        }
+        else if(simTime()>=200 && getIndex()==2)
+        {
+            cancelEvent(gendata);
         }
 
     }
-    else if(msg==endTxMsg)
+    else if(strcmp(msg->getName(),"endTxMsg")==0)
     {
         send(dataQ.pop(), "torouter$o");
+        delete msg;
     }
     else if(strcmp(msg->getName(),"ack")==0)
     {
+        cout<<"******************** Received Prices from Router " <<msg->getSenderModule()->getIndex()<<" for HOST "<<getIndex()<<" AT "<<simTime()<<endl;
         Ack * ack = (Ack *)msg;
         double price1 = ack->getPrice1();
         double price2 = ack->getPrice2();
+        cout<<"Price received from Router 0 = "<<price1<<endl;
+        cout<<"Price received from Router 1 = "<<price2<<endl;
+        cout<<"Previous Datarate  = "<<datarate<<endl;
         price = price1+price2;
+        datarate = fmin(fmax((as/price)-1,minrate),maxrate);
+        if(simTime()<40 && getIndex()==0)
+        {
+
+            cout<<"Price received at host "<<getIndex()<<" = "<<price<<" Datarate using price = "<<(as/price)-1<<endl;
+            cout<<"Datarate after bound adjustment for "<<getIndex()<<" = "<<datarate<<endl;
+            interpacketDuration = (double)(packetlength*8)/(datarate*1e6);
+            cancelEvent(gendata);
+            scheduleAfter(interpacketDuration,gendata);
+        }
+        else if(simTime()>=40 && simTime()<80 && getIndex()!=2)
+        {
+            cout<<"Price received at host "<<getIndex()<<" = "<<price<<" Datarate using price = "<<(as/price)-1<<endl;
+            cout<<"Datarate after bound adjustment for "<<getIndex()<<" = "<<datarate<<endl;
+            interpacketDuration = (double)(packetlength*8)/(datarate*1e6);
+            cancelEvent(gendata);
+            scheduleAfter(interpacketDuration,gendata);
+        }
+        else if(simTime()>=80)
+        {
+            cout<<"Price received at host "<<getIndex()<<" = "<<price<<" Datarate using price = "<<(as/price)-1<<endl;
+            cout<<"Datarate after bound adjustment for "<<getIndex()<<" = "<<datarate<<endl;
+            interpacketDuration = (double)(packetlength*8)/(datarate*1e6);
+            cancelEvent(gendata);
+            scheduleAfter(interpacketDuration,gendata);
+        }
+
         delete msg;
     }
-    else if(msg==updatemsg)
-    {
-        datarate = exp(price/as) -1;
-        interpacketDuration = (double)(packetlength*8)/(datarate*1e6);
-        scheduleAfter(50e-3,updatemsg);
-
-    }
+    //    else if(msg==updatemsg)
+    //    {
+    //
+    //        scheduleAfter(50e-3,updatemsg);
+    //
+    //    }
 }

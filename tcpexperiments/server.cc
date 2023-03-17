@@ -20,6 +20,9 @@ Define_Module(Server);
 void Server::initialize()
 {
     // TODO - Generated method body
+    received = 0;
+
+//    updateStats = new cMessage();
 }
 
 void Server::handleMessage(cMessage *msg)
@@ -28,13 +31,19 @@ void Server::handleMessage(cMessage *msg)
 
     if(strcmp(msg->getName(),"data")==0)
     {
-        Ack *ack  = new Ack("ack");
-        ack->setKind(msg->getKind());
-        ack->setId(msg->getKind());
-        ack->setPrice1(0);
-        ack->setPrice2(0);
-        send(ack, "torouter$o");
+
+        cout<<"@@@@@@@@@@@@@@@@@@@ Server "<< getIndex()<<" Delay  = "<<simTime() - msg->getCreationTime()<<endl;
+        delay.record(simTime() - msg->getCreationTime());
+
+//        Ack *ack  = new Ack("ack");
+//        ack->setKind(msg->getKind());
+//        ack->setId(msg->getKind());
+//        ack->setPrice1(0);
+//        ack->setPrice2(0);
+//        send(ack, "torouter$o");
     }
+
+
 
 
     delete msg;

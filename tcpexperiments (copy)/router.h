@@ -13,35 +13,29 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __TCPEXPERIMENTS_HOST_H_
-#define __TCPEXPERIMENTS_HOST_H_
+#ifndef __TCPEXPERIMENTS_ROUTER_H_
+#define __TCPEXPERIMENTS_ROUTER_H_
 
 #include <omnetpp.h>
 
 using namespace omnetpp;
-using namespace std;
+
 /**
  * TODO - Generated class
  */
-class Host : public cSimpleModule
+class Router : public cSimpleModule
 {
-
-private:
-    cMessage *gendata,*updatemsg;
-    double datarate,interpacketDuration,maxrate,minrate;
-    cPacketQueue dataQ;
-    int packetlength;
-    double as,price;
-protected:
+  private:
+    cPacketQueue reqQ;
+    cMessage *endTxMsg;
+  protected:
     virtual void initialize() override;
     virtual void handleMessage(cMessage *msg) override;
-public:
-    ~Host()
+  public:
+    ~Router()
     {
-        cancelAndDelete(gendata);
-        cancelAndDelete(updatemsg);
 
-        dataQ.clear();
+        reqQ.clear();
     }
 
 };

@@ -27,15 +27,18 @@ class Router : public cSimpleModule
 {
   private:
     cPacketQueue reqQ;
-    cMessage *endTxMsg,*updateprice;
-    double estrate,totalrecv,lp = 1.5e-2,price=0.5;
+    cMessage *updateprice,*endTxMsg;
+    double estrate,lp,price;
+    unsigned long totalrecv;
+    double updateinterval;
   protected:
     virtual void initialize() override;
     virtual void handleMessage(cMessage *msg) override;
   public:
     ~Router()
     {
-
+        cancelAndDelete(endTxMsg);
+        cancelAndDelete(updateprice);
         reqQ.clear();
     }
 

@@ -19,7 +19,7 @@
 #include <omnetpp.h>
 
 using namespace omnetpp;
-using namespace std;
+
 /**
  * TODO - Generated class
  */
@@ -27,11 +27,10 @@ class Host : public cSimpleModule
 {
 
 private:
-    cMessage *gendata,*updatemsg;
-    double datarate,interpacketDuration,maxrate,minrate;
+    cMessage *gendata,*endTxMsg;
+    double datarate,interpacketDuration;
     cPacketQueue dataQ;
     int packetlength;
-    double as,price;
 protected:
     virtual void initialize() override;
     virtual void handleMessage(cMessage *msg) override;
@@ -39,8 +38,6 @@ public:
     ~Host()
     {
         cancelAndDelete(gendata);
-        cancelAndDelete(updatemsg);
-
         dataQ.clear();
     }
 
