@@ -1,0 +1,332 @@
+version 3
+run General-0-20230313-02:59:28-46066
+attr configname General
+attr datetime 20230313-02:59:28
+attr datetimef 20230313-025928
+attr experiment General
+attr inifile tCPNet.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network TCPNet
+attr processid 46066
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config network TCPNet
+
+par TCPNet.host[0].torouter$o.channel typename "\"ned.DatarateChannel\""
+par TCPNet.host[0].torouter$o.channel disabled false
+attr mutable ""
+par TCPNet.host[0].torouter$o.channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.host[0].torouter$o.channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.host[0].torouter$o.channel ber 0
+attr mutable ""
+par TCPNet.host[0].torouter$o.channel per 0
+attr mutable ""
+par TCPNet.router[0].tohost$o[0].channel typename "\"ned.DatarateChannel\""
+par TCPNet.router[0].tohost$o[0].channel disabled false
+attr mutable ""
+par TCPNet.router[0].tohost$o[0].channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.router[0].tohost$o[0].channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.router[0].tohost$o[0].channel ber 0
+attr mutable ""
+par TCPNet.router[0].tohost$o[0].channel per 0
+attr mutable ""
+par TCPNet.host[1].torouter$o.channel typename "\"ned.DatarateChannel\""
+par TCPNet.host[1].torouter$o.channel disabled false
+attr mutable ""
+par TCPNet.host[1].torouter$o.channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.host[1].torouter$o.channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.host[1].torouter$o.channel ber 0
+attr mutable ""
+par TCPNet.host[1].torouter$o.channel per 0
+attr mutable ""
+par TCPNet.router[0].tohost$o[1].channel typename "\"ned.DatarateChannel\""
+par TCPNet.router[0].tohost$o[1].channel disabled false
+attr mutable ""
+par TCPNet.router[0].tohost$o[1].channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.router[0].tohost$o[1].channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.router[0].tohost$o[1].channel ber 0
+attr mutable ""
+par TCPNet.router[0].tohost$o[1].channel per 0
+attr mutable ""
+par TCPNet.host[2].torouter$o.channel typename "\"ned.DatarateChannel\""
+par TCPNet.host[2].torouter$o.channel disabled false
+attr mutable ""
+par TCPNet.host[2].torouter$o.channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.host[2].torouter$o.channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.host[2].torouter$o.channel ber 0
+attr mutable ""
+par TCPNet.host[2].torouter$o.channel per 0
+attr mutable ""
+par TCPNet.router[1].tohost$o[0].channel typename "\"ned.DatarateChannel\""
+par TCPNet.router[1].tohost$o[0].channel disabled false
+attr mutable ""
+par TCPNet.router[1].tohost$o[0].channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.router[1].tohost$o[0].channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.router[1].tohost$o[0].channel ber 0
+attr mutable ""
+par TCPNet.router[1].tohost$o[0].channel per 0
+attr mutable ""
+par TCPNet.router[0].toserver$o[0].channel typename "\"ned.DatarateChannel\""
+par TCPNet.router[0].toserver$o[0].channel disabled false
+attr mutable ""
+par TCPNet.router[0].toserver$o[0].channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.router[0].toserver$o[0].channel datarate 1e+08bps
+attr mutable ""
+attr unit bps
+par TCPNet.router[0].toserver$o[0].channel ber 0
+attr mutable ""
+par TCPNet.router[0].toserver$o[0].channel per 0
+attr mutable ""
+par TCPNet.router[1].torouter$o[0].channel typename "\"ned.DatarateChannel\""
+par TCPNet.router[1].torouter$o[0].channel disabled false
+attr mutable ""
+par TCPNet.router[1].torouter$o[0].channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.router[1].torouter$o[0].channel datarate 1e+08bps
+attr mutable ""
+attr unit bps
+par TCPNet.router[1].torouter$o[0].channel ber 0
+attr mutable ""
+par TCPNet.router[1].torouter$o[0].channel per 0
+attr mutable ""
+par TCPNet.router[1].toserver$o[0].channel typename "\"ned.DatarateChannel\""
+par TCPNet.router[1].toserver$o[0].channel disabled false
+attr mutable ""
+par TCPNet.router[1].toserver$o[0].channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.router[1].toserver$o[0].channel datarate 1.28e+08bps
+attr mutable ""
+attr unit bps
+par TCPNet.router[1].toserver$o[0].channel ber 0
+attr mutable ""
+par TCPNet.router[1].toserver$o[0].channel per 0
+attr mutable ""
+par TCPNet.router[2].torouter$o[0].channel typename "\"ned.DatarateChannel\""
+par TCPNet.router[2].torouter$o[0].channel disabled false
+attr mutable ""
+par TCPNet.router[2].torouter$o[0].channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.router[2].torouter$o[0].channel datarate 1.28e+08bps
+attr mutable ""
+attr unit bps
+par TCPNet.router[2].torouter$o[0].channel ber 0
+attr mutable ""
+par TCPNet.router[2].torouter$o[0].channel per 0
+attr mutable ""
+par TCPNet.server[0].torouter$o.channel typename "\"ned.DatarateChannel\""
+par TCPNet.server[0].torouter$o.channel disabled false
+attr mutable ""
+par TCPNet.server[0].torouter$o.channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.server[0].torouter$o.channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.server[0].torouter$o.channel ber 0
+attr mutable ""
+par TCPNet.server[0].torouter$o.channel per 0
+attr mutable ""
+par TCPNet.router[2].toserver$o[0].channel typename "\"ned.DatarateChannel\""
+par TCPNet.router[2].toserver$o[0].channel disabled false
+attr mutable ""
+par TCPNet.router[2].toserver$o[0].channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.router[2].toserver$o[0].channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.router[2].toserver$o[0].channel ber 0
+attr mutable ""
+par TCPNet.router[2].toserver$o[0].channel per 0
+attr mutable ""
+par TCPNet.sdn.torouter$o[0].channel typename "\"ned.DatarateChannel\""
+par TCPNet.sdn.torouter$o[0].channel disabled false
+attr mutable ""
+par TCPNet.sdn.torouter$o[0].channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.sdn.torouter$o[0].channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.sdn.torouter$o[0].channel ber 0
+attr mutable ""
+par TCPNet.sdn.torouter$o[0].channel per 0
+attr mutable ""
+par TCPNet.router[0].tosdn$o[0].channel typename "\"ned.DatarateChannel\""
+par TCPNet.router[0].tosdn$o[0].channel disabled false
+attr mutable ""
+par TCPNet.router[0].tosdn$o[0].channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.router[0].tosdn$o[0].channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.router[0].tosdn$o[0].channel ber 0
+attr mutable ""
+par TCPNet.router[0].tosdn$o[0].channel per 0
+attr mutable ""
+par TCPNet.server[1].torouter$o.channel typename "\"ned.DatarateChannel\""
+par TCPNet.server[1].torouter$o.channel disabled false
+attr mutable ""
+par TCPNet.server[1].torouter$o.channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.server[1].torouter$o.channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.server[1].torouter$o.channel ber 0
+attr mutable ""
+par TCPNet.server[1].torouter$o.channel per 0
+attr mutable ""
+par TCPNet.router[2].toserver$o[1].channel typename "\"ned.DatarateChannel\""
+par TCPNet.router[2].toserver$o[1].channel disabled false
+attr mutable ""
+par TCPNet.router[2].toserver$o[1].channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.router[2].toserver$o[1].channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.router[2].toserver$o[1].channel ber 0
+attr mutable ""
+par TCPNet.router[2].toserver$o[1].channel per 0
+attr mutable ""
+par TCPNet.sdn.torouter$o[1].channel typename "\"ned.DatarateChannel\""
+par TCPNet.sdn.torouter$o[1].channel disabled false
+attr mutable ""
+par TCPNet.sdn.torouter$o[1].channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.sdn.torouter$o[1].channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.sdn.torouter$o[1].channel ber 0
+attr mutable ""
+par TCPNet.sdn.torouter$o[1].channel per 0
+attr mutable ""
+par TCPNet.router[1].tosdn$o[0].channel typename "\"ned.DatarateChannel\""
+par TCPNet.router[1].tosdn$o[0].channel disabled false
+attr mutable ""
+par TCPNet.router[1].tosdn$o[0].channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.router[1].tosdn$o[0].channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.router[1].tosdn$o[0].channel ber 0
+attr mutable ""
+par TCPNet.router[1].tosdn$o[0].channel per 0
+attr mutable ""
+par TCPNet.server[2].torouter$o.channel typename "\"ned.DatarateChannel\""
+par TCPNet.server[2].torouter$o.channel disabled false
+attr mutable ""
+par TCPNet.server[2].torouter$o.channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.server[2].torouter$o.channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.server[2].torouter$o.channel ber 0
+attr mutable ""
+par TCPNet.server[2].torouter$o.channel per 0
+attr mutable ""
+par TCPNet.router[2].toserver$o[2].channel typename "\"ned.DatarateChannel\""
+par TCPNet.router[2].toserver$o[2].channel disabled false
+attr mutable ""
+par TCPNet.router[2].toserver$o[2].channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.router[2].toserver$o[2].channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.router[2].toserver$o[2].channel ber 0
+attr mutable ""
+par TCPNet.router[2].toserver$o[2].channel per 0
+attr mutable ""
+par TCPNet.sdn.torouter$o[2].channel typename "\"ned.DatarateChannel\""
+par TCPNet.sdn.torouter$o[2].channel disabled false
+attr mutable ""
+par TCPNet.sdn.torouter$o[2].channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.sdn.torouter$o[2].channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.sdn.torouter$o[2].channel ber 0
+attr mutable ""
+par TCPNet.sdn.torouter$o[2].channel per 0
+attr mutable ""
+par TCPNet.router[2].tosdn$o[0].channel typename "\"ned.DatarateChannel\""
+par TCPNet.router[2].tosdn$o[0].channel disabled false
+attr mutable ""
+par TCPNet.router[2].tosdn$o[0].channel delay 0s
+attr mutable ""
+attr unit s
+par TCPNet.router[2].tosdn$o[0].channel datarate 1e+09bps
+attr mutable ""
+attr unit bps
+par TCPNet.router[2].tosdn$o[0].channel ber 0
+attr mutable ""
+par TCPNet.router[2].tosdn$o[0].channel per 0
+attr mutable ""
+par TCPNet.host[0] typename "\"Host\""
+par TCPNet.host[0] genrate 10Mbps
+attr unit Mbps
+par TCPNet.host[1] typename "\"Host\""
+par TCPNet.host[1] genrate 10Mbps
+attr unit Mbps
+par TCPNet.host[2] typename "\"Host\""
+par TCPNet.host[2] genrate 10Mbps
+attr unit Mbps
+par TCPNet.router[0] typename "\"Router\""
+par TCPNet.router[1] typename "\"Router\""
+par TCPNet.router[2] typename "\"Router\""
+par TCPNet.server[0] typename "\"Server\""
+par TCPNet.server[1] typename "\"Server\""
+par TCPNet.server[2] typename "\"Server\""
+par TCPNet.sdn typename "\"SDN\""
+par TCPNet typename "\"TCPNet\""
+par TCPNet numhosts 3
+par TCPNet hostrate 1.5Mbps
+attr unit Mbps
+par TCPNet routerrate 1Gbps
+attr unit Gbps
+par TCPNet numrouter 3
+par TCPNet numserver 3
+par TCPNet packetSize 4000
+
